@@ -7,3 +7,7 @@
     line-height: 30px;
     cursor: pointer;
 }
+
+.open{
+    background-color: silver;
+}
