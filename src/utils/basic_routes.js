@@ -10,19 +10,9 @@ const default_routes = [
         path:"/games"
     },
     {
-        id:2,
-        name:"Como jogar",
-        path:"/comojogar"
-    },
-    {
         id:3,
         name:"Ranking",
         path:"/ranking"
-    },
-    {
-        id:4,
-        name:"Sobre nós",
-        path:"/sobrenos"
     }
 ];
 const campo_minado_routes = [
