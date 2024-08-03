@@ -5,3 +5,18 @@
 .board-row {
 display: flex;
 }
+
+.board-container {
+    display: inline-block;
+    border: 2px solid #000;
+}
+  
+.label-cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: silver;
+}

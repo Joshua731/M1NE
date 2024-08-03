@@ -67,19 +67,36 @@ function Board({board, setBoard, gameOver, isGameActive }) {
     }
   };
 
-  return(
-    <div className="board">
-        {board.map((row,rowIndex) => (
-          <div key={rowIndex} className="board-row">
-              {row.map((cell, colIndex) => (
-                <Cell 
-                key={colIndex} 
-                value={cell} 
-                onClick={() => handleCellClick(rowIndex,colIndex)}
-                onContextMenu={(e) => handleCellRightClick(e,rowIndex,colIndex)}/>
-              ))}
+  const renderColumnLabels = () => {
+    if (!board || board.length === 0) return null;
+
+    return (
+      <div className="board-row">
+        <div className="label-cell" />
+        {board[0].map((_, colIndex) => (
+          <div key={colIndex} className="label-cell">
+            {colIndex + 1} {/* 1, 2, 3, ... */}
           </div>
         ))}
+      </div>
+    );
+  };
+
+  return(
+    <div className="board">
+      {renderColumnLabels()}
+      {board.map((row,rowIndex) => (
+        <div key={rowIndex} className="board-row">
+          <div className="label-cell">{String.fromCharCode(65 + rowIndex)}</div> {/* A, B, C, ... */}
+          {row.map((cell, colIndex) => (
+            <Cell 
+            key={colIndex} 
+            value={cell} 
+            onClick={() => handleCellClick(rowIndex,colIndex)}
+            onContextMenu={(e) => handleCellRightClick(e,rowIndex,colIndex)}/>
+          ))}
+        </div>
+      ))}
     </div>
   )
 }
