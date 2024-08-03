@@ -2,38 +2,41 @@ import React from "react";
 import Cell from "../cell/Cell";
 import "./Board.css";
 
-function Board({board, setBoard, stopGame }) {
+function Board({board, setBoard, stopGame, isGameActive }) {
 
   const handleCellClick = (row,col) => {
-    // Lógica para tratar cliques na célula
+    if(isGameActive){
+      // Lógica para tratar cliques na célula
+      if(board[row][col].isOpen || board[row][col].isFlagged) return;
+      
+      const newBoard = [...board];
+      newBoard[row][col].isOpen = true;
 
-    if(board[row][col].isOpen || board[row][col].isFlagged) return;
-    
-    const newBoard = [...board];
-    newBoard[row][col].isOpen = true;
+      if(newBoard[row][col].isMine){
+        // Fim do jogo
+        alert("Game over!");
+        setBoard(newBoard);
+        stopGame();
+        return;
+      }
 
-    if(newBoard[row][col].isMine){
-      // Fim do jogo
-      alert("Game over!");
+      if(newBoard[row][col].neighborMines === 0){
+        openAdjacentCells(newBoard, row, col);
+      }
+
       setBoard(newBoard);
-      stopGame();
-      return;
     }
-
-    if(newBoard[row][col].neighborMines === 0){
-      openAdjacentCells(newBoard, row, col);
-    }
-
-    setBoard(newBoard);
   }
 
   const handleCellRightClick = (event, row, col) => {
-    event.preventDefault();
-    if (board[row][col].isOpen) return;
+    if(isGameActive){
+      event.preventDefault();
+      if (board[row][col].isOpen) return;
 
-    const newBoard = [...board];
-    newBoard[row][col].isFlagged = !newBoard[row][col].isFlagged;
-    setBoard(newBoard);
+      const newBoard = [...board];
+      newBoard[row][col].isFlagged = !newBoard[row][col].isFlagged;
+      setBoard(newBoard);
+    }
   };
 
   const openAdjacentCells = (board, row, col) => {

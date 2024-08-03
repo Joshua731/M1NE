@@ -88,7 +88,7 @@ export default function CampoMinado(){
         <Main routes={campo_minado_routes}>
             <div className="campo-minado-container">
                 <h1>Campo Minado</h1>
-                <Board board={board} setBoard={handleBoardUpdate} stopGame={handleStopGame} />
+                <Board board={board} setBoard={handleBoardUpdate} stopGame={handleStopGame} isGameActive={isGameActive} />
                 <Timer isActive={isGameActive} reset={resetTimer} onUpdate={handleTimerUpdate}/>
                 <label>
                     Selecione a Dificuldade:
