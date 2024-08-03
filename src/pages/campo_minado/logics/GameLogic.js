@@ -49,3 +49,15 @@ export const initializeBoard = (rows, cols, mines) => {
 
     return board;
 };
+
+export const revealAllMines = (board) => {
+    const newBoard = board.map(row => 
+      row.map(cell => {
+        if (cell.isMine) {
+          return { ...cell, isOpen: true };
+        }
+        return cell;
+      })
+    );
+    return newBoard;
+};

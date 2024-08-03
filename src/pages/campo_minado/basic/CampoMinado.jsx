@@ -81,14 +81,14 @@ export default function CampoMinado(){
     const handleTimerUpdate = (time) => {
         setTimer(time);
     };
-    const handleStopGame = () => {
+    const handleGameOver = () => {
         setIsGameActive(false);
     }
     return (
         <Main routes={campo_minado_routes}>
             <div className="campo-minado-container">
                 <h1>Campo Minado</h1>
-                <Board board={board} setBoard={handleBoardUpdate} stopGame={handleStopGame} isGameActive={isGameActive} />
+                <Board board={board} setBoard={handleBoardUpdate} gameOver={handleGameOver} isGameActive={isGameActive} />
                 <Timer isActive={isGameActive} reset={resetTimer} onUpdate={handleTimerUpdate}/>
                 <label>
                     Selecione a Dificuldade:

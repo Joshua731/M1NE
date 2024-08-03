@@ -1,8 +1,9 @@
 import React from "react";
 import Cell from "../cell/Cell";
 import "./Board.css";
+import { revealAllMines } from "../../logics/GameLogic";
 
-function Board({board, setBoard, stopGame, isGameActive }) {
+function Board({board, setBoard, gameOver, isGameActive }) {
 
   const handleCellClick = (row,col) => {
     if(isGameActive){
@@ -14,9 +15,10 @@ function Board({board, setBoard, stopGame, isGameActive }) {
 
       if(newBoard[row][col].isMine){
         // Fim do jogo
+        const newBoard = revealAllMines(board);
         alert("Game over!");
         setBoard(newBoard);
-        stopGame();
+        gameOver();
         return;
       }
 
