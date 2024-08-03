@@ -6,7 +6,7 @@ const default_routes = [
     },
     {
         id:1,
-        name:"Games",
+        name:"Começar a jogar",
         path:"/games"
     },
     {

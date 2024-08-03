@@ -6,8 +6,19 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    font-weight: 800;
+    color: rgb(58, 58, 58);
 }
 
 .open{
     background-color: silver;
+}
+.n1{
+    background-color: #98FB98;
+}
+.n2{
+    background-color: #F5DEB3;
+}
+.n3{
+    background-color: #F4A460;
 }

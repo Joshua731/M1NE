@@ -1,7 +1,7 @@
 import Main from "../../../layouts/main/Main"; 
 import {initializeBoard} from "../logics/GameLogic";
 import {campo_minado_routes} from "../../../utils/basic_routes";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import Board from "../components/board/Board";
 import "./CampoMinado.css";
 import Timer from "../components/timer/Timer";
@@ -12,8 +12,8 @@ export default function CampoMinado(){
     const [board, setBoard] = useState([]);
     const [isGameActive, setIsGameActive] = useState(true);
     const [isGameWon, setIsGameWon] = useState(false);
-    const [resetTimer, setResetTimer] = useState(false);
     const [timer, setTimer] = useState(0);
+    const intervalRef = useRef(null);
 
     const difficulties = {
         easy: { rows: 9, cols: 9, mines: 10 },
@@ -26,13 +26,24 @@ export default function CampoMinado(){
     const handleDifficultyChange = (event) => {
         setDifficulty(event.target.value)
     }
-
     useEffect(() => {
         setBoard(initializeBoard(rows, cols, mines));
         setIsGameActive(true);
         setIsGameWon(false);
-        setResetTimer(prev => !prev);
+        setTimer(0);
     }, [difficulty, rows, cols, mines]);
+
+    useEffect(() => {
+
+      if(isGameActive){
+        intervalRef.current = setInterval(() => {
+          setTimer((prevTime) => prevTime + 1);
+        }, 1000);
+      }else{
+        clearInterval(intervalRef.current);
+      }
+
+    }, [])
 
     const checkWinCondition = (board) => {
         for (let row of board) {
@@ -77,10 +88,6 @@ export default function CampoMinado(){
             alert("Você venceu!");
         }
     };
-
-    const handleTimerUpdate = (time) => {
-        setTimer(time);
-    };
     const handleGameOver = () => {
         setIsGameActive(false);
     }
@@ -89,7 +96,7 @@ export default function CampoMinado(){
             <div className="campo-minado-container">
                 <h1>Campo Minado</h1>
                 <Board board={board} setBoard={handleBoardUpdate} gameOver={handleGameOver} isGameActive={isGameActive} />
-                <Timer isActive={isGameActive} reset={resetTimer} onUpdate={handleTimerUpdate}/>
+                <Timer time={timer}/>
                 <label>
                     Selecione a Dificuldade:
                     <select value={difficulty} onChange={handleDifficultyChange}>
