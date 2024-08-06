@@ -16,7 +16,7 @@ export default function CampoMinado(){
     const intervalRef = useRef(null);
 
     const difficulties = {
-        easy: { rows: 9, cols: 9, mines: 10 },
+        easy: { rows: 9, cols: 9, mines: 1 },
         intermediate: { rows: 16, cols: 16, mines: 40 },
         hard: { rows: 16, cols: 30, mines: 99 },
     };
@@ -91,6 +91,23 @@ export default function CampoMinado(){
     const handleGameOver = () => {
         setIsGameActive(false);
     }
+    const playAgain = () => {
+      setBoard(initializeBoard(rows, cols, mines));
+      setIsGameActive(true);
+      setIsGameWon(false);
+      setTimer(0);
+    }
+    const renderButtonPlayAgain = () => {
+       if(isGameWon){
+        return (
+        <div className="container-playagain">
+            <button onClick={playAgain}>
+              Jogar denovo
+            </button>
+        </div>
+        )
+       }
+    }
     return (
         <Main routes={campo_minado_routes}>
             <div className="campo-minado-container">
@@ -105,6 +122,7 @@ export default function CampoMinado(){
                     <option value="hard">Difícil</option>
                     </select>
                 </label>
+                {renderButtonPlayAgain()}
             </div>
         </Main>
     )
