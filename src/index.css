@@ -17,3 +17,23 @@ h1 {
   text-align: center;
   color: #f0e68c; /* cor amarela suave */
 }
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+section {
+  margin-bottom: 20px;
+}
+p, ul, ol {
+  line-height: 1.6;
+}
+
+ul, ol {
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}

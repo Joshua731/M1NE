@@ -18,5 +18,10 @@
     "name": "Take16",
     "time": 0,
     "difficulty": "easy"
+  },
+  {
+    "name": "Jorge",
+    "time": 0,
+    "difficulty": "easy"
   }
 ]

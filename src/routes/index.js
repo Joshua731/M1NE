@@ -9,7 +9,7 @@ export default function Router(){
         <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/games" element={<Games/>}/>
-            <Route path="/games/campo-minado" element={<CampoMinado/>}/>
+            <Route path="/campo-minado" element={<CampoMinado/>}/>
             <Route path="/ranking" element={<Ranking/>}/>
         </Routes>
     )

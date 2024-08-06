@@ -7,7 +7,7 @@ const default_routes = [
     {
         id:1,
         name:"Começar a jogar",
-        path:"/games"
+        path:"/campo-minado"
     },
     {
         id:3,

@@ -1,7 +1,7 @@
 import Main from "../../../layouts/main/Main"; 
 import {initializeBoard} from "../logics/GameLogic";
 import {campo_minado_routes} from "../../../utils/basic_routes";
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Board from "../components/board/Board";
 import "./CampoMinado.css";
 import Timer from "../components/timer/Timer";
