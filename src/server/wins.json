@@ -1,27 +1,26 @@
 [
   {
     "name": "Jorge",
-    "time": 1,
-    "difficulty": "easy"
-  },
-  {
-    "name": "KKKKK",
-    "time": 42,
-    "difficulty": "easy"
-  },
-  {
-    "name": "Teste",
     "time": 0,
-    "difficulty": "easy"
-  },
-  {
-    "name": "Take16",
-    "time": 0,
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "date": "2024-08-08T00:38:02.914Z"
   },
   {
     "name": "Jorge",
-    "time": 0,
-    "difficulty": "easy"
+    "time": 2,
+    "difficulty": "easy",
+    "date": "2024-08-08T00:50:44.413Z"
+  },
+  {
+    "name": "Jorge Take 3",
+    "time": 44,
+    "difficulty": "easy",
+    "date": "2024-08-08T00:51:44.540Z"
+  },
+  {
+    "name": "Vencemos",
+    "time": 26,
+    "difficulty": "easy",
+    "date": "2024-08-08T01:07:42.737Z"
   }
 ]

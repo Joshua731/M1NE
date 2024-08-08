@@ -16,7 +16,7 @@ export default function CampoMinado(){
     const intervalRef = useRef(null);
 
     const difficulties = {
-        easy: { rows: 9, cols: 9, mines: 1 },
+        easy: { rows: 9, cols: 9, mines: 10 },
         intermediate: { rows: 16, cols: 16, mines: 40 },
         hard: { rows: 16, cols: 30, mines: 99 },
     };
@@ -31,6 +31,7 @@ export default function CampoMinado(){
         setIsGameActive(true);
         setIsGameWon(false);
         setTimer(0);
+        clearInterval(intervalRef.current); 
     }, [difficulty, rows, cols, mines]);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ export default function CampoMinado(){
       }else{
         clearInterval(intervalRef.current);
       }
-
+      return () => clearInterval(intervalRef.current); 
     }, [])
 
     const checkWinCondition = (board) => {
@@ -57,7 +58,12 @@ export default function CampoMinado(){
     };
 
     const saveWinData = async (name, time, difficulty) => {
-        const winData = { name, time, difficulty };
+        const winData = {
+          name,
+          time,
+          difficulty,
+          date: new Date().toISOString(),
+        };
         try {
           const response = await fetch(`${ROUTE_SERVER}/saveWin`, {
             method: 'POST',
@@ -81,6 +87,7 @@ export default function CampoMinado(){
         if (checkWinCondition(newBoard)) {
             setIsGameWon(true);
             setIsGameActive(false);
+            clearInterval(intervalRef.current);
             const name = prompt("Você venceu! Digite seu nome:");
             if (name) {
                 saveWinData(name, timer, difficulty);
@@ -90,6 +97,7 @@ export default function CampoMinado(){
     };
     const handleGameOver = () => {
         setIsGameActive(false);
+        clearInterval(intervalRef.current);
     }
     const playAgain = () => {
       setBoard(initializeBoard(rows, cols, mines));

@@ -36,7 +36,7 @@ app.post('/saveWin', (req, res) => {
   });
 });
 
-app.get('/ranking', (req, res) => {
+app.get('/wins', (req, res) => {
     fs.readFile(DATA_FILE, 'utf8', (err, data) => {
       if (err && err.code === 'ENOENT') {
         return res.json([]);
