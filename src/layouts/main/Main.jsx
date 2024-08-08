@@ -15,7 +15,7 @@ export default function Main({children, routes}){
         <>
             <div className="body">
                 <aside>
-                    <h1>Desconexos - Campo Minado</h1>
+                    <h1>Desconexo's - Campo Minado</h1>
                     <nav>
                     <ul>
                             {listRoutes}
