@@ -31,11 +31,9 @@ export default function CampoMinado(){
         setIsGameActive(true);
         setIsGameWon(false);
         setTimer(0);
-        clearInterval(intervalRef.current); 
     }, [difficulty, rows, cols, mines]);
 
     useEffect(() => {
-
       if(isGameActive){
         intervalRef.current = setInterval(() => {
           setTimer((prevTime) => prevTime + 1);
