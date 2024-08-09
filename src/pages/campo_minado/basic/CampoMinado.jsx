@@ -6,9 +6,12 @@ import Board from "../components/board/Board";
 import "./CampoMinado.css";
 import Timer from "../components/timer/Timer";
 import {ROUTE_SERVER} from "../../../utils/configurations";
+import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 
 export default function CampoMinado(){
-    const [difficulty, setDifficulty] = useState('easy');
+    //const [difficulty, setDifficulty] = useState('easy');
+    const {difficulty} = useParams(); 
     const [board, setBoard] = useState([]);
     const [isGameActive, setIsGameActive] = useState(true);
     const [isGameWon, setIsGameWon] = useState(false);
@@ -23,9 +26,6 @@ export default function CampoMinado(){
 
     const { rows, cols, mines } = difficulties[difficulty];
 
-    const handleDifficultyChange = (event) => {
-        setDifficulty(event.target.value)
-    }
     useEffect(() => {
         setBoard(initializeBoard(rows, cols, mines));
         setIsGameActive(true);
@@ -102,32 +102,37 @@ export default function CampoMinado(){
       setIsGameActive(true);
       setIsGameWon(false);
       setTimer(0);
+      clearInterval(intervalRef.current);
     }
     const renderButtonPlayAgain = () => {
-       if(isGameWon){
+       if(isGameWon || !isGameActive){
         return (
         <div className="container-playagain">
             <button onClick={playAgain}>
-              Jogar denovo
+                Jogar denovo
             </button>
         </div>
         )
        }
     }
+    const renderDificulty = () => {
+      if(difficulty == "easy") return "Fácil";
+      if(difficulty == "intermediate") return "Intermediário";
+      if(difficulty == "hard") return "Difícil";
+    }
     return (
         <Main routes={campo_minado_routes}>
             <div className="campo-minado-container">
-                <h1>Campo Minado</h1>
-                <Board board={board} setBoard={handleBoardUpdate} gameOver={handleGameOver} isGameActive={isGameActive} />
+              <div className="header">
+                <div className="quant-bomb">
+                    <h2>{mines} bombas</h2>
+                </div>
+                <div>
+                  <h2>Nivel: {renderDificulty()}</h2>
+                </div>
                 <Timer time={timer}/>
-                <label>
-                    Selecione a Dificuldade:
-                    <select value={difficulty} onChange={handleDifficultyChange}>
-                    <option value="easy">Fácil</option>
-                    <option value="intermediate">Intermediário</option>
-                    <option value="hard">Difícil</option>
-                    </select>
-                </label>
+              </div>
+                <Board board={board} setBoard={handleBoardUpdate} gameOver={handleGameOver} isGameActive={isGameActive} />
                 {renderButtonPlayAgain()}
             </div>
         </Main>

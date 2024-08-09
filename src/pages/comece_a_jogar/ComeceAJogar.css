@@ -1,0 +1,36 @@
+.select-difficulty-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.difficulty-options {
+    margin-bottom: 20px;
+}
+
+.difficulty-options label {
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+.options{
+    margin-top: 50px;
+}
+
+/* Botão */
+.container-comece-jogar .btn-comece-jogar {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 100ms;
+}
+.container-comece-jogar .btn-comece-jogar:hover{
+    background-color: #313131;
+}

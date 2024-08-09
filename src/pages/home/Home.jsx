@@ -49,7 +49,7 @@ export default function Home(){
                     <img src={explosionGif} alt="Boa sorte!" />
                 </section>
                 <div className="container-footer-startgame">
-                    <NavLink to={"campo-minado"} className={"btnstartgame"}>
+                    <NavLink to={"comece-a-jogar"} className={"btnstartgame"}>
                         Começe a jogar
                     </NavLink>
                     
