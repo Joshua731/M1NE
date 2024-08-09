@@ -1,10 +1,10 @@
 import React from "react";
 import "./Cell.css";
 
-export default function Cell({value, onClick,onContextMenu}){
+export default function  Cell({value, onClick, onContextMenu}) {
     return (
         <button 
-        className={`cell ${value.isOpen ? "open" : ""} ${value.isFlagged ? "flagged" : ""} ${value.neighborMines > 0 && value.isOpen? `n${value.neighborMines}`:""}`}
+        className={`cell ${value.isOpen ? "open" : ""} ${value.isFlagged ? "flag" : ""} ${value.neighborMines > 0 && value.isOpen? `n${value.neighborMines}`:""}`}
         onContextMenu={onContextMenu}
         onClick={onClick}
         >

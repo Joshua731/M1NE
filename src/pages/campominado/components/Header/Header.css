@@ -1,0 +1,20 @@
+header.campo-minado-header{
+    padding: 10px;
+    border-bottom: solid 5px gray;
+}
+
+.campo-minado-header button{
+    margin-right: 10px;
+    width: fit-content;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 100ms;
+}
+.campo-minado-header button:hover{
+    background-color: #313131;
+}

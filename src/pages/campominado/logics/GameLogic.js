@@ -1,3 +1,5 @@
+import {ROUTE_SERVER} from "../../../utils/configurations";
+
 export const initializeBoard = (rows, cols, mines) => {
     const board = Array(rows)
     .fill(null)
@@ -60,4 +62,40 @@ export const revealAllMines = (board) => {
       })
     );
     return newBoard;
+};
+
+export const checkWinCondition = (board) => {
+    for (let row of board) {
+      for (let cell of row) {
+        if (!cell.isMine && !cell.isOpen) {
+          return false;
+        }
+      }
+    }
+    return true;
+};
+
+export const saveWinData = async (name, time, difficulty) => {
+    const winData = {
+      name,
+      time,
+      difficulty,
+      date: new Date().toISOString(),
+    };
+    try {
+      const response = await fetch(`${ROUTE_SERVER}/saveWin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(winData),
+      });
+      if (response.ok) {
+        console.log('Win saved successfully');
+      } else {
+        console.error('Failed to save win');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
 };

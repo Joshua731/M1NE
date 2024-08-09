@@ -1,9 +1,9 @@
 import React from "react";
-import Cell from "../cell/Cell";
 import "./Board.css";
-import { revealAllMines } from "../../logics/GameLogic";
+import { revealAllMines } from "../../logics/GameLogic.js";
+import Cell from "../Cell/Cell.jsx";
 
-function Board({board, setBoard, gameOver, isGameActive }) {
+export default function Board({board, setBoard, gameOver, isGameActive }) {
 
   const handleCellClick = (row,col) => {
     if(isGameActive){
@@ -16,7 +16,6 @@ function Board({board, setBoard, gameOver, isGameActive }) {
       if(newBoard[row][col].isMine){
         // Fim do jogo
         const newBoard = revealAllMines(board);
-        alert("Game over!");
         setBoard(newBoard);
         gameOver();
         return;
@@ -100,5 +99,3 @@ function Board({board, setBoard, gameOver, isGameActive }) {
     </div>
   )
 }
-
-export default Board;

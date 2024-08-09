@@ -1,0 +1,30 @@
+.container-game-won{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-game-won .container-form{
+    display: flex;
+    justify-content: space-between;
+}
+.container-game-won .container-form input {
+    width: 70%;
+}
+.container-game-won .container-form button {
+    min-width: 100px;
+    width: fit-content;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #37b642;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 100ms;
+}
+.container-game-won .container-form button:hover{
+    background-color: #33993c;
+}
+.container-game-won .success {
+    color: #44da51;
+}
