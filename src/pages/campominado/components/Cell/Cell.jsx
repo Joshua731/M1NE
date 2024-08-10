@@ -4,7 +4,7 @@ import "./Cell.css";
 export default function  Cell({value, onClick, onContextMenu}) {
     return (
         <button 
-        className={`cell ${value.isOpen ? "open" : ""} ${value.isFlagged ? "flag" : ""} ${value.neighborMines > 0 && value.isOpen? `n${value.neighborMines}`:""}`}
+        className={`cell ${value.isOpen ? "open" : ""} ${value.isFlagged ? "flag" : ""} ${value.neighborMines > 0 && value.isOpen? `n${value.neighborMines}`:""} ${value.isOpen && value.isMine? "mine" : "" }`}
         onContextMenu={onContextMenu}
         onClick={onClick}
         >

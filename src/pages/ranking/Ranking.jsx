@@ -11,9 +11,10 @@ export default function Ranking(){
     const [wins, setWins] = useState([]);
     const [filteredWins, setFilteredWins] = useState([]);
     const [difficulty, setDifficulty] = useState("all");
+    document.title = "Ranking";
   
     useEffect(() => {
-      fetch("http://localhost:3001/wins")
+      fetch(`${ROUTE_SERVER}/wins`)
         .then((response) => response.json())
         .then((data) => {
           setWins(data);

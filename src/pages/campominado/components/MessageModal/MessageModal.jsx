@@ -8,6 +8,7 @@ export default function MessageModal({isOpen, closeModal, actionOk, isGameLose, 
 
     const handleActionOk = () => {
         actionOk();
+        setAdded(false);
         closeModal();
     }
     const action = () => {

@@ -1,9 +1,5 @@
-.board {
-    
-}
-  
 .board-row {
-display: flex;
+    display: flex;
 }
 
 .board-container {

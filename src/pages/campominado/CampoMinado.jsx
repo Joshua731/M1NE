@@ -5,9 +5,13 @@ import OpcoesModal from "./components/OpcoesModal/OpcoesModal";
 import Header from "./components/Header/Header";
 import "./CampoMinado.css";
 import {initializeBoard, checkWinCondition, saveWinData} from "./logics/GameLogic";
-import Board from "./components/Board/Board";
 import MessageModal from "./components/MessageModal/MessageModal";
 import Timer from "./components/Timer/Timer";
+import BackgroundMusic from "./components/BackgroundMusic/BackgroundMusic";
+import gameOverMusic from "../../music/gameover.mp3";
+import victoryMusic from "../../music/victory.mp3";
+import PlayList from "./components/PlayList/PlayList";
+import Board from "./components/Board/Board";
 
 export default function CampoMinado(){
     const [isOpcoesModalOpen, setOpcoesModalOpen] = useState(false);
@@ -21,10 +25,13 @@ export default function CampoMinado(){
     const [timerActive, setTimerActive] = useState(true);
     const [resetTimer, setResetTimer] = useState(false);
     const [playerName, setPlayerName] = useState("");
+    const [playGameOver, setPlayGameOver] = useState(false);
+    const [playVictory, setPlayVictory] = useState(false);
+    document.title = "Campo Minado";
     
 
     const difficulties = {
-        easy: { label: "Fácil", value: "easy", rows: 9, cols: 9, mines: 10 },
+        easy: { label: "Fácil", value: "easy", rows: 9, cols: 9, mines: 1 },
         intermediate: { label: "Intermediário", value: "intermediate", rows: 16, cols: 16, mines: 40 },
         hard: { label: "Difícil", value: "hard", rows: 16, cols: 30, mines: 99 },
     };
@@ -63,12 +70,7 @@ export default function CampoMinado(){
     }
 
     const handleOkOpcoesModal = () => {
-        setBoard(initializeBoard(rows, cols, mines));
-        setIsGameActive(true);
-        setIsGameWon(false);
-        setResetTimer(true);
-        setTimerActive(true);
-        setTime(0);
+        novoJogo();
     }
     const novoJogo = () => {
         setBoard(initializeBoard(rows, cols, mines));
@@ -85,25 +87,27 @@ export default function CampoMinado(){
             setIsGameWon(true);
             setIsGameLoser(false);
             setIsGameActive(false);
+            setTimerActive(false);
             openMessageModal();
+            setPlayVictory(true);
         }
     };
 
     const handlePlayerName = (event) => {
         setPlayerName(event.target.value);
     }
-
     const handleAddPlayerOnRanking = () => {
         if(playerName) {
             saveWinData(playerName, time,difficulty);
         }
+        setPlayerName("");
     }
-
     const handleGameOver = () => {
         setIsGameActive(false);
         setIsGameLoser(true);
         setTimerActive(false);
         openMessageModal()
+        setPlayGameOver(true);
     }
     return (
         <Main routes={campo_minado_routes}>
@@ -114,8 +118,11 @@ export default function CampoMinado(){
                     <h3>{mines} bombas</h3>
                 </div>
                 <div className="content">
-                    <Timer isActive={timerActive} getTime={handleGetTime} resetTimer={resetTimer}/>
-                    <Board board={board} isGameActive={isGameActive} setBoard={handleBoardUpdate} gameOver={handleGameOver}  />
+                    <div className="game">
+                        <Timer isActive={timerActive} getTime={handleGetTime} resetTimer={resetTimer}/>
+                        <Board board={board} isGameActive={isGameActive} setBoard={handleBoardUpdate} gameOver={handleGameOver} />
+                    </div>
+                    <PlayList/>
                 </div>
 
                 <OpcoesModal 
@@ -137,6 +144,8 @@ export default function CampoMinado(){
                     playerName={playerName} handlePlayerName={handlePlayerName}
                     handleAddPlayerOnRanking={handleAddPlayerOnRanking}
                 />
+                <BackgroundMusic playSound={playGameOver} musicpath={gameOverMusic} loop={false} setPlaySound={setPlayGameOver} />
+                <BackgroundMusic playSound={playVictory} musicpath={victoryMusic} loop={false} setPlaySound={setPlayVictory}/> 
             </div>
         </Main>
     )

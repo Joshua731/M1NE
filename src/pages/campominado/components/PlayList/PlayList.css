@@ -1,0 +1,66 @@
+.playlist li img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+.playlist li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.playlist li p {
+    width: 100%;
+}
+
+.container-playlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: fit-content;
+    background-color: #222;
+    padding: 20px;
+}
+.container-playlist ul {
+    margin: 0;
+}
+.container-playlist .controls {
+    width: 100%;
+    border-bottom: solid 5px gray;
+    margin-bottom: 20px;
+}
+.container-playlist .controls .buttons-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container-playlist .controls .info{
+    margin-bottom: 10px;
+    text-align: center;
+}
+.container-playlist .controls .volume {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    
+}
+.container-playlist .controls .volume input{
+    width: 50%;
+}
+.container-playlist .controls button {
+    min-width: 100px;
+    width: fit-content;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 100ms;
+}
+
+.container-playlist .controls button:hover{
+    background-color: #313131;
+}
+  

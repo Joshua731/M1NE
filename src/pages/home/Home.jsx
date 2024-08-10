@@ -5,6 +5,7 @@ import "./Home.css";
 import { NavLink } from "react-router-dom";
 
 export default function Home(){
+    document.title = "Página principal";
     return (
         <Main routes={default_routes}>
             <div className="body-pagina-principal">
