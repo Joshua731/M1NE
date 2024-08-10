@@ -31,7 +31,7 @@ export default function CampoMinado(){
     
 
     const difficulties = {
-        easy: { label: "Fácil", value: "easy", rows: 9, cols: 9, mines: 1 },
+        easy: { label: "Fácil", value: "easy", rows: 9, cols: 9, mines: 10 },
         intermediate: { label: "Intermediário", value: "intermediate", rows: 16, cols: 16, mines: 40 },
         hard: { label: "Difícil", value: "hard", rows: 16, cols: 30, mines: 99 },
     };
