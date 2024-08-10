@@ -40,12 +40,28 @@
 .container-playlist .controls .volume {
     margin-top: 20px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-bottom: 20px;
     
 }
-.container-playlist .controls .volume input{
-    width: 50%;
+.container-playlist .controls .volume div{
+    display: flex;
+    width: 90%;
+}
+.container-playlist .controls label{
+    margin-right: 5px;
+}
+.container-playlist .controls  input{
+    width: 100%;
+}
+.container-playlist .controls .progress{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.container-playlist .controls .progress div{
+    display: flex;
+    width: 70%;
 }
 .container-playlist .controls button {
     min-width: 100px;

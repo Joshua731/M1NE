@@ -10,6 +10,8 @@ import campoMinadoMusic from "../music/campominado.mp3";
 import campoMinadoCapa from "../imgs/campo_minado.png";
 import judasMusic from "../music/lady-gaga-judas.mp3";
 import judasCapa from "../imgs/lady-gaga-judas-capa.jpg";
+import IsabellaLullabyMusic from "../music/Isabellas-Lullaby-Melody.mp3";
+import IsabellaLullabyCapa from "../imgs/Isabella-lullaby-capa.png";
 
 const ROUTE_SERVER = "http://localhost:3001";
 
@@ -20,6 +22,7 @@ const tracks = [
     { title: "Love, Maybe - MeloMance", src:maybeLoveMusic, img: maybeLoveCapa },
     { title: "Heart Attack - Demi Lovato", src:heartAttackMusic, img: heartAttackCapa },
     { title: "Judas - Lady Gaga", src:judasMusic, img: judasCapa },
+    { title: "Isabella Lullaby - The Promised Neverland", src:IsabellaLullabyMusic, img: IsabellaLullabyCapa },
 ];
 
 export {

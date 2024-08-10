@@ -1,5 +1,5 @@
 import ReactHowler from "react-howler";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./PlayList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward, faForward, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
@@ -9,19 +9,30 @@ export default function PlayList(){
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const [volume, setVolume] = useState(0.5);
+    const [seek, setSeek] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const howlerRef = useRef(null);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (howlerRef.current) {
+                setSeek(howlerRef.current.seek());
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [isPlaying]);
 
     const handleEnd = () => {
-        // Avança para a próxima música quando a atual termina
         if (currentTrackIndex < tracks.length - 1) {
             setCurrentTrackIndex(currentTrackIndex + 1);
         } else {
-            setCurrentTrackIndex(0); // Reinicia a playlist
+            setCurrentTrackIndex(0);
         }
     };
 
-
     useEffect(() => {
-        setIsPlaying(true); // Inicia a reprodução ao montar o componente
+        setIsPlaying(true);
     }, []);
     
     const handlePlayPause = () => {
@@ -52,6 +63,19 @@ export default function PlayList(){
     const handleVolumeChange = (e) => {
         setVolume(parseFloat(e.target.value));
     };
+    const handleSeekChange = (e) => {
+        const newSeek = parseFloat(e.target.value);
+        setSeek(newSeek);
+        howlerRef.current.seek(newSeek);
+    };
+    const onLoad = () => {
+        setDuration(howlerRef.current.duration());
+    };
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    };
 
     return (
         <div className="container-playlist">
@@ -60,7 +84,9 @@ export default function PlayList(){
                 playing={isPlaying}
                 volume={volume}
                 onEnd={handleEnd}
+                ref={howlerRef}
                 loop={true}
+                onLoad={onLoad}
             />
             <div className="controls">
                 <div className="info">
@@ -76,17 +102,34 @@ export default function PlayList(){
                     <button onClick={handleNext}><FontAwesomeIcon icon={faForward}/></button>
                 </div>
                 <div className="volume">
-                    <label htmlFor="volume">Volume: </label>
-                    <input
-                        id="volume"
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={volume}
-                        onChange={handleVolumeChange}
-                    />
+                    <div>
+                        <label htmlFor="volume">Volume: </label>
+                        <input
+                            id="volume"
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={handleVolumeChange}
+                        />
+                    </div>
                     <span>{Math.round(volume * 100)}%</span>
+                </div>
+                <div className="progress">
+                    <div>
+                        <label htmlFor="progress">Progresso: </label>
+                        <input
+                            id="progress"
+                            type="range"
+                            min="0"
+                            max={duration}
+                            step="0.01"
+                            value={seek}
+                            onChange={handleSeekChange}
+                        />
+                    </div>
+                    <span>{formatTime(seek)} / {formatTime(duration)}</span>
                 </div>
             </div>
             <nav className="playlist">
