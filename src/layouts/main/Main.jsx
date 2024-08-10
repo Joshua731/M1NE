@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import logoBlack from "../../imgs/logo_black.png";
 import "./Main.css"
 
 export default function Main({children, routes}){
@@ -10,6 +11,23 @@ export default function Main({children, routes}){
             <NavLink key={route.id} to={route.path}><li className={pathname == route.path? "selected":""}>{route.name}</li></NavLink>
         )
     })
+
+    useEffect(() => {
+        const changeFavicon = (faviconUrl) => {
+          const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+          link.type = 'image/x-icon';
+          link.rel = 'shortcut icon';
+          link.href = faviconUrl;
+          document.getElementsByTagName('head')[0].appendChild(link);
+        };
+    
+        changeFavicon(logoBlack);
+    
+        // Limpeza opcional: Restaurar o favicon original ao desmontar o componente
+        return () => {
+          changeFavicon(logoBlack); // Substitua pelo caminho do favicon original
+        };
+      }, []);
 
     return (
         <>
