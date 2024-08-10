@@ -23,9 +23,8 @@ export default function Main({children, routes}){
     
         changeFavicon(logoBlack);
     
-        // Limpeza opcional: Restaurar o favicon original ao desmontar o componente
         return () => {
-          changeFavicon(logoBlack); // Substitua pelo caminho do favicon original
+          changeFavicon(logoBlack);
         };
       }, []);
 
